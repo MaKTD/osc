@@ -1,0 +1,18 @@
+# you should put this config in your .xinitrc file
+
+xset s 300 5
+
+XSECURELOCK_PASSWORD_PROMPT=cursor \
+XSECURELOCK_SHOW_USERNAME=1 \
+XSECURELOCK_SHOW_DATETIME=1 \
+XSECURELOCK_SAVER=saver_mpv \
+XSECURELOCK_IMAGE_DURATION_SECONDS=600 \
+XSECURELOCK_LIST_VIDEOS_COMMAND="find ~/Pictures -type f" \
+xss-lock -l -- xsecurelock &
+
+
+# to triger lock manually you should use
+# xset s activate
+# or can use lock_screen alias (installed in ~/.local/bin/)
+
+
