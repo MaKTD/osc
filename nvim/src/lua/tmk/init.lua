@@ -1,5 +1,4 @@
 require("tmk.lazypboot")
 require("tmk.set")
-require("tmk.remap")
 require("tmk.lazypset")
 require("tmk.after")
