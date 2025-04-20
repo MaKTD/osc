@@ -1,0 +1,65 @@
+My neovim cheet sheet *my-neovim-cheet-sheet*
+
+-------------------------------------------------------------------------------
+General points
+  * be good at relative jumps 5j 12k ..etc
+  * use operator + motion eg ci{ y5j ..., try to not repeat same many times
+  * avoid arrow keys
+  
+
+--------------------------------------------------------------------------------
+Navigation
+  * V - visual line mode, more convient for lines selection, regular v is more usefull for granular selection
+  * Vertical
+    ** C-u - half page up
+    ** C-d - half page down
+    * C-b - full page up
+    * C-f - full page up
+    * { \ } - move by paragrah backward \ forward 
+    * gg - move at the top of the file
+    * G - move at the bottom of the file
+  * Shor distance
+    * w, W - worlds forward jump
+    * b, B - worlds backward jump
+    * e, E - world forward jump at the world end
+    * ge, gE - world backward jump at the world end
+    * 0 - line start jump
+    * ^, _ - jump to first non empty character of the line find character forward/backward
+    * $ - jump to the end on the line
+  * Variable
+    * f, F - find character forward/backward and place cursor on character
+    * t T - find character forward/backward and place cursor before character
+    * , - Repeat latest f, t, F or T reversed
+    * ; - Repeat latest f, t, F or T
+    * . - repeat last command
+    * % - jump between brackets 
+    * square commands (see :h [)
+
+--------------------------------------------------------------------------------
+Smart selecting
+  * va{ / va( / vi{ / va( - select everything within {} () or in around {} () 
+  * viw - select world on the cursor
+  * o while in visual mode - jump between start and end of the selection
+
+--------------------------------------------------------------------------------
+Searhing
+  * / - search via file
+  * ? - search backward
+  * * - select world at the cursor and place in the search (search current selected)
+
+
+--------------------------------------------------------------------------------
+Insert
+  * I - go the start of the line and enter insert mode
+  * A - go the end of the line and enter insert mode
+  * o - make new line below cursor and enter insert mode
+  * O - make new line above cursor and enter insert mode
+
+--------------------------------------------------------------------------------
+Manipulate
+  * VY - copy line but it quicker
+
+--------------------------------------------------------------------------------
+Vim controls
+  * 
+

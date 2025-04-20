@@ -1,4 +1,5 @@
-vim.keymap.set("n", "<leader>d", vim.cmd.Ex)
+--vim.keymap.set("n", "<leader>d", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>d","<CMD>Oil<CR>")
 
 -- --- Custom ---
 
@@ -18,7 +19,7 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Delete highlighted world wi
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank to system clipboard" })
 
-vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d", { desc = "Delete to void register (without copy)" })
+vim.keymap.set({ "n", "v" }, "<leader>e", "\"_d", { desc = "Delete to void register (without copy)" })
 
 vim.keymap.set("n", "Q", "<nop>", { desc = "Disable orig dinding" })
 
@@ -35,9 +36,9 @@ vim.keymap.set("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 --vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 --vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
---vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }, { desc = "Make file executable" })
+-- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }, { desc = "Make file executable" })
 
---vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Navigate projects with tmux" })
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Navigate projects with tmux" })
 
 -- --- Telesckope ---
 local telebuiltin = require('telescope.builtin')
@@ -84,3 +85,6 @@ end)
 vim.keymap.set("n", "]t", function()
   require("trouble").previous({ skip_groups = true, jump = true });
 end)
+
+
+
