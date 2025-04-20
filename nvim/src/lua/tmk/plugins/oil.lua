@@ -70,21 +70,20 @@ return {
       -- Set to `false` to remove a keymap
       -- See :help oil-actions for a list of all available actions
       keymaps = {
-        ["g?"] = { "actions.show_help", mode = "n" },
-        ["<leader>a"] = {
+        ["<leader>o?"] = { "actions.show_help", mode = "n" },
+        ["<leader>oa"] = {
           function()
             require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
           end,
           mode = 'n',
         },
-        ["<leader>z"] = {
+        ["<leader>oz"] = {
           function()
             require("oil").set_columns({ "icon" })
           end,
           mode = 'n',
         },
-        ["<leader>p"] = { "actions.preview", opts = { split = "belowright", vertical = true } },
-
+        ["<leader>op"] = { "actions.preview", opts = { split = "belowright", vertical = true } },
         ["<CR>"] = "actions.select",
         ["<C-s>"] = { "actions.select", opts = { vertical = true } },
         ["<C-h>"] = { "actions.select", opts = { horizontal = true } },

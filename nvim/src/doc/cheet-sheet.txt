@@ -61,5 +61,6 @@ Manipulate
 
 --------------------------------------------------------------------------------
 Vim controls
-  * 
+  * bd(!) - close current buffer without modify (forcly)
+  * w|bd - close current buffer with save
 
