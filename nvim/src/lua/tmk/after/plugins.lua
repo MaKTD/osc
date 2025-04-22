@@ -27,6 +27,15 @@ autocmd('TextYankPost', {
 })
 
 
+local lspconf = require('lspconfig')
+lspconf.denols.setup {
+  root_dir = lspconf.util.root_pattern("deno.json", "deno.jsonc"),
+}
+lspconf.ts_ls.setup {
+  root_dir = lspconf.util.root_pattern("package.json"),
+  single_file_support = false
+}
+
 
 --autocmd({"BufWritePre"}, {
 --   group = UserGroup,
@@ -60,7 +69,8 @@ autocmd('LspAttach', {
     vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set({ "n", "i" }, "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
   end

@@ -12,7 +12,7 @@ return {
     "j-hui/fidget.nvim",
     "L3MON4D3/LuaSnip",
   },
-  config = function ()
+  config = function()
     require("conform").setup({
       formatters_by_ft = {
         --lua = { "stylua" },
@@ -24,7 +24,6 @@ return {
         --javascript = { "prettierd", "prettier", stop_after_first = true },
       }
     })
-
 
     local cmp = require('cmp')
     local cmp_lsp = require("cmp_nvim_lsp")
@@ -39,7 +38,7 @@ return {
     require("fidget").setup({})
     require('mason').setup()
     require('mason-lspconfig').setup({
-      ensure_installed = { "lua_ls", "ts_ls", "gopls" },
+      ensure_installed = { "lua_ls", "ts_ls", "gopls", "denols" },
       handlers = {
         function(server_name)
           require('lspconfig')[server_name].setup({
@@ -61,9 +60,23 @@ return {
           })
           vim.g.zig_fmt_parse_errors = 0
           vim.g.zig_fmt_autosave = 0
-
         end,
       },
+
+      ['ts_ls'] = function()
+        local lspconfig = require("lspconfig")
+        lspconfig.ts_ls.setup({
+          root_dir = lspconfig.util.root_pattern("package.json"),
+          single_file_support = false,
+        })
+      end,
+
+      ['denols'] = function()
+        local lspconfig = require("lspconfig")
+        lspconfig.denols.setup({
+          root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+        })
+      end,
 
       ["lua_ls"] = function()
         local lspconfig = require("lspconfig")
@@ -86,9 +99,7 @@ return {
       end,
     })
 
-
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
 
     cmp.setup({
       snippet = {
@@ -97,31 +108,58 @@ return {
           require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
-      --window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
-      --},
-      mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-      }),
-      --[[
-      mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      }),
-      --]]
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      mapping = {
+        ['<C-space>'] = {
+          i = cmp.mapping.confirm({ select = true }),
+        },
+        ['<C-y>'] = {
+          i = cmp.mapping.complete(),
+        },
+        ['<C-e>'] = {
+          i = cmp.mapping.abort(),
+        },
+        ['<C-j>'] = {
+          i = function()
+            if cmp.visible() then
+              cmp.select_next_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<C-k>'] = {
+          i = function()
+            if cmp.visible() then
+              cmp.select_prev_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+      },
+      --mapping = cmp.mapping.preset.insert({
+      --  ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+      --  ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+      --  ['<C-space>'] = cmp.mapping.confirm({ select = true }),
+      --  ['<C-y>'] = cmp.mapping.complete(),
+      --}),
+      --mapping = cmp.mapping.preset.insert({
+      --  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      --  ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      --  ['<C-Space>'] = cmp.mapping.complete(),
+      --  ['<C-e>'] = cmp.mapping.abort(),
+      --  ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      --}),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
       }, {
-          { name = 'buffer' },
-        })
+        { name = 'buffer' },
+      })
     })
 
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -138,8 +176,8 @@ return {
       sources = cmp.config.sources({
         { name = 'path' }
       }, {
-          { name = 'cmdline' }
-        }),
+        { name = 'cmdline' }
+      }),
       matching = { disallow_symbol_nonprefix_matching = false }
     })
 

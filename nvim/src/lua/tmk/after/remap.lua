@@ -1,5 +1,5 @@
 --vim.keymap.set("n", "<leader>d", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>d","<CMD>Oil<CR>")
+vim.keymap.set("n", "<leader>d", "<CMD>Oil<CR>")
 
 -- --- Custom ---
 
@@ -29,6 +29,9 @@ vim.keymap.set("n", "<leader>,", function()
 end, { desc = "Format buffer" })
 
 vim.keymap.set("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Quick replace" })
+
+vim.keymap.set("n", "<leader>[", function() vim.cmd("bprev") end, { desc = "Go to the prev buffer" })
+vim.keymap.set("n", "<leader>]", function() vim.cmd("bnext") end, { desc = "Go to the next buffer" })
 
 -- fix quick fix navigation
 --vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -66,9 +69,10 @@ vim.keymap.set("n", "<leader>=", function() harpoon:list():next() end)
 --vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
 --vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 
+-- ---UndoTree--- --
 vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle)
 
--- Neogit
+-- ---Neogit--- --
 vim.keymap.set('n', '<leader>gs', vim.cmd.Neogit)
 
 
@@ -85,6 +89,3 @@ end)
 vim.keymap.set("n", "]t", function()
   require("trouble").previous({ skip_groups = true, jump = true });
 end)
-
-
-

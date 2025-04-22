@@ -40,6 +40,7 @@ Smart selecting
   * va{ / va( / vi{ / va( - select everything within {} () or in around {} () 
   * viw - select world on the cursor
   * o while in visual mode - jump between start and end of the selection
+  * C-v, then select lines, then some action like i or a - enter visual mode, select lines and apply action on multiple lines
 
 --------------------------------------------------------------------------------
 Searhing
