@@ -15,6 +15,9 @@ return {
   config = function()
     require("conform").setup({
       formatters_by_ft = {
+        go = { "goimports", "gofmt" },
+        javascript = { "eslint_d"  },
+        typescript = { "eslint_d"  },
         --lua = { "stylua" },
         -- Conform will run multiple formatters sequentially
         --python = { "isort", "black" },
@@ -22,7 +25,10 @@ return {
         --rust = { "rustfmt", lsp_format = "fallback" },
         -- Conform will run the first available formatter
         --javascript = { "prettierd", "prettier", stop_after_first = true },
-      }
+      },
+      default_format_opts = {
+        lsp_format = "fallback",
+      },
     })
 
     local cmp = require('cmp')
@@ -164,7 +170,58 @@ return {
 
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ '/', '?' }, {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = {
+        ['<Tab>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_next_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<S-Tab>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_prev_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<C-j>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_next_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<C-k>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_prev_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<C-space>'] = {
+          c = cmp.mapping.confirm({ select = true }),
+        },
+        ['<C-y>'] = {
+          c = cmp.mapping.confirm({ select = false }),
+        },
+        ['<C-e>'] = {
+          c = cmp.mapping.abort(),
+        },
+      },
+      --mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = 'buffer' }
       }
@@ -172,7 +229,58 @@ return {
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = {
+        ['<Tab>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_next_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<S-Tab>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_prev_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<C-j>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_next_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<C-k>'] = {
+          c = function()
+            local cmp = require('cmp')
+            if cmp.visible() then
+              cmp.select_prev_item(cmp_select)
+            else
+              cmp.complete()
+            end
+          end,
+        },
+        ['<C-space>'] = {
+          c = cmp.mapping.confirm({ select = true }),
+        },
+        ['<C-y>'] = {
+          c = cmp.mapping.confirm({ select = false }),
+        },
+        ['<C-e>'] = {
+          c = cmp.mapping.abort(),
+        },
+      },
+      --mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = 'path' }
       }, {

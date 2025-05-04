@@ -24,8 +24,8 @@ vim.keymap.set({ "n", "v" }, "<leader>e", "\"_d", { desc = "Delete to void regis
 vim.keymap.set("n", "Q", "<nop>", { desc = "Disable orig dinding" })
 
 vim.keymap.set("n", "<leader>,", function()
-  vim.lsp.buf.format()
-  --require("conform").format({ bufnr = 0 })
+  --vim.lsp.buf.format()
+  require("conform").format({ bufnr = 0 })
 end, { desc = "Format buffer" })
 
 vim.keymap.set("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Quick replace" })
@@ -49,6 +49,8 @@ vim.keymap.set('n', '<leader>ff', telebuiltin.find_files, { desc = 'Telescope fi
 vim.keymap.set('n', '<leader>s', telebuiltin.git_files, { desc = 'Telescope find in git files' })
 vim.keymap.set('n', '<leader>fh', telebuiltin.help_tags, { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>b', telebuiltin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fr', telebuiltin.lsp_references, { desc = 'Telescope lsp_references' })
+
 vim.keymap.set('n', '<leader>fg',
   function()
     telebuiltin.grep_string({ search = vim.fn.input("Grep > ") })
@@ -89,3 +91,8 @@ end)
 vim.keymap.set("n", "]t", function()
   require("trouble").previous({ skip_groups = true, jump = true });
 end)
+
+
+-- ---Autosession ---
+vim.keymap.set("n", "<leader>fp", function() vim.cmd("SessionSearch") end)
+vim.keymap.set("n", "<leader>ps", function() vim.cmd("SessionSave") end)

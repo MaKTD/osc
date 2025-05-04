@@ -37,5 +37,8 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.signcolumn = 'yes'
 
-vim.cmd("helptags ~/.config/nvim/doc")
+vim.opt.spell = true
+vim.opt.spelllang = "en"
 
+vim.cmd("helptags ~/.config/nvim/doc")
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
