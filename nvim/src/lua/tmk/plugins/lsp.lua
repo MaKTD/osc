@@ -294,7 +294,7 @@ return {
       virtual_text = true,
       secerity_sort = true,
       float = {
-        focusable = false,
+        focusable = true,
         style = "minimal",
         border = "rounded",
         --source = "always",

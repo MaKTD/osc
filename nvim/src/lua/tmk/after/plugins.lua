@@ -4,6 +4,30 @@ local UserGroup = augroup('UserGenGroup', {})
 
 local yank_group = augroup('HLYank', {})
 
+-- function to create a list of commands and convert them to autocommands
+-------- This function is taken from https://github.com/norcalli/nvim_utils
+--local nvim_create_augroups = function(definitions)
+--    for group_name, definition in pairs(definitions) do
+--        vim.api.nvim_command('augroup '..group_name)
+--        vim.api.nvim_command('autocmd!')
+--        for _, def in ipairs(definition) do
+--            local command = table.concat(vim.tbl_flatten{'autocmd', def}, ' ')
+--            vim.api.nvim_command(command)
+--        end
+--        vim.api.nvim_command('augroup END')
+--    end
+--end
+--
+--
+--local autoCommands = {
+--    -- other autocommands
+--    open_folds = {
+--        {"BufReadPost,FileReadPost", "*", "normal zR"} }
+--}
+--
+--nvim_create_augroups(autoCommands)
+
+
 --function R(name)
 --    require("plenary.reload").reload_module(name)
 --end
@@ -25,6 +49,7 @@ autocmd('TextYankPost', {
         })
     end,
 })
+
 
 
 local lspconf = require('lspconfig')

@@ -40,5 +40,13 @@ vim.opt.signcolumn = 'yes'
 vim.opt.spell = true
 vim.opt.spelllang = "en"
 
+vim.opt.foldmethod="expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldcolumn = "0"
+vim.opt.foldtext = ""
+vim.opt.foldlevelstart = 99
+vim.opt.foldlevel = 99
+vim.opt.foldnestmax = 4
+
 vim.cmd("helptags ~/.config/nvim/doc")
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

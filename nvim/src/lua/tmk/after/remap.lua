@@ -34,10 +34,10 @@ vim.keymap.set("n", "<leader>[", function() vim.cmd("bprev") end, { desc = "Go t
 vim.keymap.set("n", "<leader>]", function() vim.cmd("bnext") end, { desc = "Go to the next buffer" })
 
 -- fix quick fix navigation
---vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
---vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
---vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
---vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }, { desc = "Make file executable" })
 
@@ -48,8 +48,26 @@ local telebuiltin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', telebuiltin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>s', telebuiltin.git_files, { desc = 'Telescope find in git files' })
 vim.keymap.set('n', '<leader>fh', telebuiltin.help_tags, { desc = 'Telescope help tags' })
-vim.keymap.set('n', '<leader>b', telebuiltin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fr', telebuiltin.lsp_references, { desc = 'Telescope lsp_references' })
+vim.keymap.set(
+  'n', '<leader>b',
+  function() telebuiltin.buffers({ initial_mode = 'normal' }) end,
+  { desc = 'Telescope buffers' }
+)
+vim.keymap.set(
+  'n', '<leader>fr',
+  function() telebuiltin.lsp_references({ initial_mode = 'normal' }) end,
+  { desc = 'Telescope lsp_references' }
+)
+vim.keymap.set(
+  'n', '<leader>tlf',
+  function() telebuiltin.diagnostics({ initial_mode = 'normal', bufnr = 0 }) end,
+  { desc = 'Teleskope current buffer diagnostics' }
+)
+vim.keymap.set(
+  'n', '<leader>tlg',
+  function() telebuiltin.diagnostics({ initial_mode = 'normal' }) end,
+  { desc = 'Telescope project diagnostics'  }
+)
 
 vim.keymap.set('n', '<leader>fg',
   function()
@@ -80,19 +98,16 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Neogit)
 
 
 -- --- Trouble ---
-vim.keymap.set("n", "<leader>tt", function()
-  require("trouble").toggle()
-end)
-
-vim.keymap.set("n", "[t", function()
+vim.keymap.set("n", "]t", function()
   require("trouble").next({ skip_groups = true, jump = true });
 end)
 
-vim.keymap.set("n", "]t", function()
-  require("trouble").previous({ skip_groups = true, jump = true });
+vim.keymap.set("n", "[t", function()
+  require("trouble").prev({ skip_groups = true, jump = true });
 end)
 
 
--- ---Autosession ---
-vim.keymap.set("n", "<leader>fp", function() vim.cmd("SessionSearch") end)
-vim.keymap.set("n", "<leader>ps", function() vim.cmd("SessionSave") end)
+-- Obsession --
+-- :Obsessesion - start recording session
+-- :Obsessesion! - stop recording session and delete
+
